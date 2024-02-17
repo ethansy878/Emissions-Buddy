@@ -49,3 +49,7 @@ def hello_world():
 
 # DEPLOY (in TERMINAL)
 # flask --app .\flask\app.py run
+
+# BROWSER REQUEST (Localhost):
+# http://127.0.0.1:5000/emission_calc?start=%22NULL%22&end=%22NULL%22&planeType=%22NULL%22
+# CALL THIS IN THE CHROME EXTENSION JAVASCRIPT
