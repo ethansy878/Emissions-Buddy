@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrome Extension Workshop!</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Emissions Buddy!</title>
 </head>
+
 <body>
-    <div>
-        <h2>Replace words you don't know with synonyms! Or any fun word hehe</h2>
-    </div>
-    <label for="word">Enter word to replace:</label>
-    <input type="text" id="word">
-    <!-- Include input field for replacement word -->
-    <label for="replacement">Enter replacement word:</label>
-    <input type="text" id="replacement">
-    <button id="def">Find Synonym</button>
-    <button id="replace">Replace</button>
-    <p>Synonyms:</p>
-    <div id="results"></div>
     <script src="popup.js"></script>
+    <div id="title">
+        <h1>Emissions Buddy</h1>
+    </div>
+    <div id="status">
+        <h2>Status: Working Properly</h2>
+    </div>
+
+    <div class="idle">
+        <div class="row">
+            <div class="column">    
+                <img src=""> <p>Emissions Buddy avatar goes here</p>
+            </div>
+            <div class="column">
+                <p>Click here to learn more about reducing emissions: put a link here</p>
+            </div>
+          </div>
+          
+        <ul>
+
+        </ul>
+    </div>
+
+    
 </body>
 </html>
