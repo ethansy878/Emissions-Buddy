@@ -1,5 +1,5 @@
 {
-    "name": "Chrome Extension Workshop!",
+    "name": "Emissions Buddy!",
     "version": "1.0.0",
     "description": "Track your travel emissions with Emissions Buddy!",
     "manifest_version": 3,
@@ -12,5 +12,11 @@
     "action": {
         "default_popup": "index.html",
         "default_title": "Emissions Buddy!"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.alaskaair.com/", "https://www.delta.com/", "https://www.delta.com/", "https://www.southwest.com/", "https://www.united.com/"],
+            "js": ["./js/popup.js"]
+        }
+    ]
 }
