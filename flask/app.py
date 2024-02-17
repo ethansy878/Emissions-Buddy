@@ -37,9 +37,11 @@ def polynomial_alternative(distKm):
     return flyKeroseneKg
 
 def fetch_from_distances(start: str, end: str):
+    print("WIP")
     # SQL goes here
 
 def fetch_from_planes(planeType: str, data: str):
+    print("WIP")
     # SQL goes here
 
 def hello_world():
