@@ -1,24 +1,27 @@
-CREATE DATABASE planes;
+CREATE DATABASE planes
+
+GO
+
 CREATE TABLE Planes_Table (
-    AirlineName VARCHAR(300),
-    a FLOAT,
-    b FLOAT,
-    c FLOAT,
-    Seats FLOAT,
-    PassengerLoadFactor FLOAT,
-    CargoFactor FLOAT,
-    EconomyFactor FLOAT,
-    PremiumFactor FLOAT,
-    BusinessFactor FLOAT,
-    FirstClassFactor FLOAT, 
-    EmissionFactor FLOAT,
-    NonCO2Effects FLOAT,
-    PreProduction FLOAT,
-    AircraftFactor FLOAT,
-    AirportInfrastructure FLOAT,
+    AirlineName VARCHAR(300) PRIMARY KEY,
+    a DOUBLE PRECISION,
+    b DOUBLE PRECISION,
+    c DOUBLE PRECISION,
+    Seats DOUBLE PRECISION,
+    PassengerLoadFactor DOUBLE PRECISION,
+    CargoFactor DOUBLE PRECISION,
+    EconomyFactor DOUBLE PRECISION,
+    PremiumFactor DOUBLE PRECISION,
+    BusinessFactor DOUBLE PRECISION,
+    FirstClassFactor DOUBLE PRECISION, 
+    EmissionFactor DOUBLE PRECISION,
+    NonCO2Effects DOUBLE PRECISION,
+    PreProduction DOUBLE PRECISION,
+    AircraftFactor DOUBLE PRECISION,
+    AirportInfrastructure DOUBLE PRECISION,
 );
 
-INSERT INTO planes (AirlineName, a, b, c, Seats, PassengerLoadFactor,
+INSERT INTO Planes_Table (AirlineName, a, b, c, Seats, PassengerLoadFactor,
                     CargoFactor, EconomyFactor, PremiumFactor, BusinessFactor, 
                     FirstClassFactor, EmissionFactor, NonCO2Effects, PreProduction, 
                     AircraftFactor, AirportInfrastructure)
