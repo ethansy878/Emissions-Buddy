@@ -1,9 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('replace').addEventListener('click', replace);
+    //document.getElementById('replace').addEventListener('click', replace);
     //document.getElementById('def').addEventListener('click', getSynonym);
 
 });
+
+/*
 
 function replace(){
     const word = document.getElementById("word").value;
@@ -21,6 +23,9 @@ function replace(){
     });
 }
 
+*.
+
+/* Old code from workshop
 function functionToInject(word, replacement){
     console.log('replace');
     const toChange = new RegExp(`\\b${word}\\b`, 'gi');
@@ -55,7 +60,7 @@ async function getSynonym(){
         console.error(error);
     }
 }
-/*
+
 document.addEventListener("mouseup", function(event) {
     let selectedText = window.getSelection().toString().trim();
     if(selectedText !== "") {
