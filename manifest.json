@@ -1,9 +1,9 @@
 {
     "name": "Chrome Extension Workshop!",
     "version": "1.0.0",
-    "description": "This extension gives you the ability to look up word synonyms and replace a word on a web page with a synonym (or anything else)",
+    "description": "Track your travel emissions with Emissions Buddy!",
     "manifest_version": 3,
-    "author": "Kavitha Vinod and Jake Esperson",
+    "author": "Ethan Sychangco, Alyce Wu, Sean Lai, Andy Li",
     "permissions": [
         "activeTab",
         "tabs",
@@ -11,6 +11,6 @@
       ],
     "action": {
         "default_popup": "index.html",
-        "default_title": "Chrome Extension Workshop!"
+        "default_title": "Emissions Buddy!"
     }
 }
