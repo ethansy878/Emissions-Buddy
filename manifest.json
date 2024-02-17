@@ -1,0 +1,16 @@
+{
+    "name": "Chrome Extension Workshop!",
+    "version": "1.0.0",
+    "description": "This extension gives you the ability to look up word synonyms and replace a word on a web page with a synonym (or anything else)",
+    "manifest_version": 3,
+    "author": "Kavitha Vinod and Jake Esperson",
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "scripting"
+      ],
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Chrome Extension Workshop!"
+    }
+}
