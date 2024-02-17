@@ -13,7 +13,7 @@ def calc():
     num2 = request.args.get('num2', type=int)
     return jsonify(sum = num1 + num2)
 
-@app.route("emission_calc")
+@app.route("/emission_calc")
 def emission_calc(start: str, end: str, planeType: str):
     x = fetch_from_distances(start, end) # distance in kilometers
 
