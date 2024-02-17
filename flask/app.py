@@ -14,7 +14,11 @@ def calc():
     return jsonify(sum = num1 + num2)
 
 @app.route("/emission_calc")
-def emission_calc(start: str, end: str, planeType: str):
+def emission_calc():
+    start = request.args.get('start', type=str)
+    end = request.args.get('end', type=str)
+    planeType = request.args.get('planeType', type=str)
+
     x = fetch_from_distances(start, end) # distance in kilometers
 
     polynomial = polynomial_alternative(x)
@@ -28,7 +32,7 @@ def emission_calc(start: str, end: str, planeType: str):
     AF = fetch_from_planes(planeType, "AF") # Aircraft factor
     A = fetch_from_planes(planeType, "A") # Airport infrastructure emissions
     
-    return (polynomial/(S * PLF))*(1-CF)*CW*(EF*M+P)+AF*x+A
+    return jsonify((polynomial/(S * PLF))*(1-CF)*CW*(EF*M+P)+AF*x+A)
 
 def polynomial_alternative(distKm):
     takeoffKeroseneTons = 1.1; # 1.1 tons of kerosene
