@@ -9,10 +9,12 @@
         "tabs",
         "scripting"
       ],
+    
     "action": {
         "default_popup": "index.html",
         "default_title": "Emissions Buddy!"
     },
+    
     "content_scripts": [
         {
             "matches": ["https://www.alaskaair.com/*", "https://www.delta.com/*", "https://www.delta.com/*", "https://www.southwest.com/*", "https://www.united.com/*"],
