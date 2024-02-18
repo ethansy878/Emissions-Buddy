@@ -8,7 +8,7 @@ const sendPost = async (url) => {
     let emissionNum = document.getElementById('emissionnum')    
     emissionNum.innerHTML = emData + " kg CO2"
 
-    treeUrl = 'http://127.0.0.1:5000/trees?emissions=' + data
+    treeUrl = 'http://127.0.0.1:5000/trees?emissions=' + emData
     const treeResponse = await fetch(treeUrl)
     const treeData = await treeResponse.json();
 
@@ -41,6 +41,8 @@ function happyRedirect(){
 let url = undefined;
 
 // CREDIT: https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
+const parser = new DOMParser(); // this must be global due to several function .this()
+
 function onWindowLoad() {
     let noButton = document.getElementById("NO");
     noButton.addEventListener("click", function() {
