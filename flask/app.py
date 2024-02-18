@@ -12,8 +12,17 @@ def create_connection(path):
         print("Connection to SQLite DB successful")
     except Error as e:
         print(f"The error '{e}' occurred")
-
     return connection
+
+def execute_read_query(connection, query):
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Error as e:
+        print(f"The error '{e}' occurred")
 
 app = Flask(__name__)
 
@@ -25,7 +34,8 @@ def calc():
 
 @app.route("/emission_calc")
 def emission_calc():
-    sql = create_connection("./")
+    sql = create_connection("./db/planes.db")
+
     start = request.args.get('start', type=str)
     end = request.args.get('end', type=str)
     planeType = request.args.get('planeType', type=str)
