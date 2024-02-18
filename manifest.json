@@ -4,6 +4,12 @@
     "description": "Track your travel emissions with Emissions Buddy!",
     "manifest_version": 3,
     "author": "Ethan Sychangco, Alyce Wu, Sean Lai, Andy Li",
+    "icons": {
+        "16": "assets/Artboard 16.png",
+        "32": "assets/Artboard 32.png",
+        "48": "assets/Artboard 48.png",
+        "128": "assets/Artboard 128.png"
+      },
     "permissions": [
         "activeTab",
         "tabs",
