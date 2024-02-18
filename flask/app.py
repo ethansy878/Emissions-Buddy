@@ -25,8 +25,7 @@ def execute_read_query(connection, query):
         print(f"The error '{e}' occurred")
 
 
-# Start Flask Logic
-# Flask import
+# Flask Logic
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -36,13 +35,6 @@ app = Flask(__name__)
 #app.config['CORS_HEADERS'] = 'Content-Type'
 
 cors = CORS(app)
-
-
-@app.route("/add")
-def calc():
-    num1 = request.args.get('num1', type=int)
-    num2 = request.args.get('num2', type=int)
-    return jsonify(sum = num1 + num2)
 
 @app.route("/emission_calc")
 #@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
