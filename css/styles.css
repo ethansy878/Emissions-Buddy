@@ -1,5 +1,4 @@
-/* Got the flexbox from here 
-https://www.w3schools.com/howto/howto_css_two_columns.asp */
+/* CREDIT: Flexbox - https://www.w3schools.com/howto/howto_css_two_columns.asp */
 .row {
     display: flex;
   }
@@ -18,10 +17,12 @@ https://www.w3schools.com/howto/howto_css_two_columns.asp */
       scale 1s,
       background-color 1s,
       transform 0.25s
-    }
-   .button:active{
+  }
+
+  .button:active{
     transform: scale(1.1);
-   }
+  }
+
   .button:hover{
     background-color:aquamarine;
     transform: scale(1.2);
@@ -34,7 +35,6 @@ https://www.w3schools.com/howto/howto_css_two_columns.asp */
     margin-top: -100px;
     margin-left: -100px;
   }
-
   
   body {
     width: 25rem
