@@ -4,10 +4,7 @@
 // 127.0.0.1:5000/emission_calc?start="NULL"&end="NULL"&airlineName="Alaska"
 
 const sendPost = async () => {
-    const url = 'http://127.0.0.1:5000/emission_calc?start="NULL"&end="NULL"&airlineName="Alaska"'; 
-    
-    
-    
+    const url = 'http://127.0.0.1:5000/emission_calc?start="GKA"&end="MAG"&airlineName="Alaska"'; 
     
     // the URL to send the HTTP request to
     //const body = ''; // whatever you want to send in the body of the HTTP request

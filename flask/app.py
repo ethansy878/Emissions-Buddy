@@ -30,14 +30,9 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
-
-#app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
-#app.config['CORS_HEADERS'] = 'Content-Type'
-
-cors = CORS(app)
+cors = CORS(app) # teehee security bypass
 
 @app.route("/emission_calc")
-#@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def emission_calc():
     sql = create_connection("./db/mydatabase.db")
 
@@ -46,7 +41,7 @@ def emission_calc():
     airlineName = request.args.get('airlineName', type=str)
 
     # NEED BIG FILE
-    x = 1 # fetch_from_distances(start, end) # distance in kilometers
+    x = get_dist(start, end) # distance in kilometers
     polynomial = polynomial_alternative(x)
 
     S = fetch_from_planes(sql, airlineName, "S") # Average number of seats
@@ -69,10 +64,6 @@ def polynomial_alternative(distKm):
     takeoffKeroseneKg = takeoffKeroseneTons * 907.185
     flyKeroseneKg = 15.8 * distKm
     return flyKeroseneKg
-
-def fetch_from_distances(sql, start: str, end: str):
-    print("WIP")
-    # SQL goes here
 
 def fetch_from_planes(sql, airlineName: str, data: str):
     stringDict = {
@@ -104,13 +95,15 @@ def car_emissions(a1, a2, cartype):
 import pandas
 # Get distance between 2 airports
 def get_dist(a1, a2):
-    airports = pandas.get_cvs("db/airports.dat")
+    airports = pandas.read_csv("db/airports.dat")
     lat1 = airports.iat[a1, "Latitude"]
     lat2 = airports.iat[a2, "Latitude"]
     lon1 = airports.iat[a1, "Longitude"]
     lon2 = airports.iat[a2, "Longitude"]
 
-    return math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
+    d = math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
+    print(d)
+    return d
 
 def get_carbon_tree_comparison(emissions):
     return int(emissions / 27.8333)
