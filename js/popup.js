@@ -1,6 +1,15 @@
-let div = document.createElement("div"); 
-document.body.appendChild(div); 
-div.innerHTML = "<img src='EmissionBuddyLogoTransparent.png'>";
+//index = chrome.runtime.getURL("index.html")
+
+// chrome.action.setPopup("carbonemission.html");
+
+let idle = document.getElementById("idle");
+idle.setAttribute("hidden", true);
+
+/*
+let iframe = document.createElement("iframe"); 
+document.body.appendChild(iframe); 
+iframe.setAttribute("src", chrome.runtime.getURL("carbonemission.html")); */
+// does not work due to security safety
 
 // edit this to instead inject a button in the bottom right
 // has emission buddy icon
