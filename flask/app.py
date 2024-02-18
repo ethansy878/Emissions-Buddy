@@ -166,11 +166,11 @@ cors = CORS(app) # teehee security bypass
 
 @app.route("/emission_calc")
 def emission_calc():
-    sql = create_connection("./db/mydatabase.db")
-
     start = request.args.get('start', type=str)
     end = request.args.get('end', type=str)
     airlineName = request.args.get('airlineName', type=str)
+
+    sql = create_connection("./db/mydatabase.db")
 
     # NEED BIG FILE
     x = get_dist(start, end) # distance in kilometers
@@ -217,10 +217,6 @@ def fetch_from_planes(sql, airlineName: str, data: str):
         "S": "Seats",
         "PLF": "PassengerLoadFactor",
         "CF": "CargoFactor",
-        #"EF": "EconomyFactor",
-        #"PF": "PremiumFactor",
-        #"BF" "BusinessFactor",
-        #"FC" "FirstClassFactor",
         "EF": "EmissionFactor",
         "M": "NonCO2Effects",
         "P": "PreProduction",
@@ -276,13 +272,6 @@ def get_dist(a1, a2):
     lat2 = radians(lat2)
     lon1 = radians(lon1)
     lon2 = radians(lon2)
-
-
-    #lat1 = radians(airports.at[a1, 'Latitude'])
-    #print(lat1)
-    #lat2 = radians(airports.loc[str(a2), 'Latitude'])
-    #lon1 = radians(airports.loc[str(a1), 'Longitude'])
-    #lon2 = radians(airports.loc[str(a2), 'Longitude'])
 
     dlon = lon2 - lon1
     dlat = lat2 - lat1
