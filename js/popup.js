@@ -1,6 +1,6 @@
 let div = document.createElement("div"); 
 document.body.appendChild(div); 
-div.innerText = "Button";
+div.innerHTML = "<img src='EmissionBuddyLogoTransparent.png'>";
 
 // edit this to instead inject a button in the bottom right
 // has emission buddy icon
@@ -13,5 +13,3 @@ div.innerText = "Button";
 
 // on booking site detected scrape("start", "end")
 
-
-document.insert ../popupbox.html
