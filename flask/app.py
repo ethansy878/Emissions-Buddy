@@ -112,6 +112,9 @@ def get_dist(a1, a2):
 
     return math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
 
+def get_carbon_tree_comparison(emissions):
+    return int(emissions / 27.8333)
+
 def hello_world():
     return("Hello World!")
 
