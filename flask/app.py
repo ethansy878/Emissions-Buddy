@@ -1,6 +1,7 @@
 # SQL Logic
 # CREDIT: https://realpython.com/python-sql-libraries/
 import sqlite3
+import math
 from sqlite3 import Error
 
 def create_connection(path):
@@ -92,6 +93,23 @@ def fetch_from_planes(sql, airlineName: str, data: str):
     print(result)
     print(result[0][0])
     return result[0][0] # because array of tuples
+
+def car_emissions(a1, a2, cartype):
+    if cartype is True: # regular fuel
+        return get_dist(a1, a2) * 0.2487
+    else: # diesel 
+        return get_dist(a1, a2) * 0.2849
+
+import pandas
+# Get distance between 2 airports
+def get_dist(a1, a2):
+    airports = pandas.get_cvs("db/airports.dat")
+    lat1 = airports.iat[a1, "Latitude"]
+    lat2 = airports.iat[a2, "Latitude"]
+    lon1 = airports.iat[a1, "Longitude"]
+    lon2 = airports.iat[a2, "Longitude"]
+
+    return math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
 
 def hello_world():
     return("Hello World!")
