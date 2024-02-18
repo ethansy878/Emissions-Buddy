@@ -18,7 +18,7 @@ const sendPost = async (url) => {
         console.log("Executed after 1 second");
     }, 1000); */
     
-    emissionNum.innerHTML = data
+    emissionNum.innerHTML = data + " kg CO2"
 
     treeUrl = 'http://127.0.0.1:5000/trees?emissions=' + data
     
@@ -26,7 +26,7 @@ const sendPost = async (url) => {
     const treeData = await treeResponse.json(); // or response.json() if your server returns JSON
 
     let treeNum = document.getElementById('treenum')
-    treeNum.innerHTML = treeData
+    treeNum.innerHTML = treeData + " Trees I need to plant in to offset your CO2 within a year"
 }
 
 //function for button to display photo
