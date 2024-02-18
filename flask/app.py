@@ -1,6 +1,4 @@
-# Flask import
-from flask import Flask, jsonify, request
-
+# SQL Logic
 # CREDIT: https://realpython.com/python-sql-libraries/
 import sqlite3
 from sqlite3 import Error
@@ -24,6 +22,11 @@ def execute_read_query(connection, query):
     except Error as e:
         print(f"The error '{e}' occurred")
 
+
+# Start Flask Logic
+# Flask import
+from flask import Flask, jsonify, request
+
 app = Flask(__name__)
 
 @app.route("/add")
@@ -40,13 +43,14 @@ def emission_calc():
     end = request.args.get('end', type=str)
     planeType = request.args.get('planeType', type=str)
 
-    x = fetch_from_distances(start, end) # distance in kilometers
+    # NEED BIG FILE
+    # x = fetch_from_distances(start, end) # distance in kilometers
+    # polynomial = polynomial_alternative(x)
 
-    polynomial = polynomial_alternative(x)
     S = fetch_from_planes(planeType, "S") # Average number of seats
     PLF = fetch_from_planes(planeType, "PLF") # Passenger Load Factor
     CF = fetch_from_planes(planeType, "CF") # Cargo Factor
-    CW = fetch_from_planes(planeType, "CW") # Cabin class weighting factor
+    CW = 1 # Cabin class weighting factor - FORCED: 1
     EF = fetch_from_planes(planeType, "EF") # CO2 emission factor for jet fuel combusion (kerosene)
     M = fetch_from_planes(planeType, "M") # Multiplier accounting for potential non-CO2 effects
     P = fetch_from_planes(planeType, "P") # CO2e emission factor for pre-production jet fuel, kerosene 
@@ -66,8 +70,22 @@ def fetch_from_distances(start: str, end: str):
     # SQL goes here
 
 def fetch_from_planes(planeType: str, data: str):
-    print("WIP")
-    # SQL goes here
+    stringDict = {
+        "S": "Seats",
+        "PLF": "PassengerLoadFactor",
+        "CF": "CargoFactor",
+        "EF": "EconomyFactor",
+        "PF": "PremiumFactor",
+        "BusinessFactor",
+        "FirstClassFactor",
+        "EmissionFactor",
+        "NonCO2Effects",
+        "PreProduction",
+        "AF" "AircraftFactor",
+        "A": "AirportInfrastructure"
+    }
+    query = ?
+    execute_read_query() # connection, query
 
 def hello_world():
     return("Hello World!")

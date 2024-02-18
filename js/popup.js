@@ -1,6 +1,6 @@
 let div = document.createElement("div"); 
 document.body.appendChild(div); 
-div.innerText="Button";
+div.innerText = "Button";
 
 // edit this to instead inject a button in the bottom right
 // has emission buddy icon
