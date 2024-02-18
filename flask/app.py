@@ -95,11 +95,12 @@ def car_emissions(a1, a2, cartype):
 import pandas
 # Get distance between 2 airports
 def get_dist(a1, a2):
-    airports = pandas.read_csv("db/airports.dat")
-    lat1 = airports.iat[a1, "Latitude"]
-    lat2 = airports.iat[a2, "Latitude"]
-    lon1 = airports.iat[a1, "Longitude"]
-    lon2 = airports.iat[a2, "Longitude"]
+    airports = pandas.read_csv("db/airports.dat", header=0)
+    lat1 = airports.loc[airports["IATA"] == a1]["Latitude"]
+    lat1 = airports[airports.IATA == a1]["Latitude"]
+    lat2 = airports.at[a2, "Latitude"]
+    lon1 = airports.at[a1, "Longitude"]
+    lon2 = airports.at[a2, "Longitude"]
 
     d = math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
     print(d)
