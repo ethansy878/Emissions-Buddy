@@ -1,12 +1,15 @@
+if (window.location.toString === "www.alaskaair.com"){
+    let idle = document.getElementById('idle');
+    idle.setAttribute("hidden", true)
+};
 
-document.addEventListener('DOMContentLoaded', function() {
-    //document.getElementById('replace').addEventListener('click', replace);
-    //document.getElementById('def').addEventListener('click', getSynonym);
 
+chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+    let url = tabs[0].url;
+    document.getElementById('status').innerHTML = "Edited"
 });
 
 /*
-
 function replace(){
     const word = document.getElementById("word").value;
     const replacement = document.getElementById("replacement").value;
