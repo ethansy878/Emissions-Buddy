@@ -19,7 +19,8 @@ CREATE TABLE Planes_Table (
 
 INSERT INTO Planes_Table (AirlineName, a, b, c, Seats, PassengerLoadFactor,
                     CargoFactor, EconomyFactor, PremiumFactor, BusinessFactor, 
-                    FirstClassFactor, EmissionFactor, NonCO2Effects, PreProduction, 
+                    FirstClassFactor, EmissionFactor, PreProduction,
+                    NonCO2Effects, 
                     AircraftFactor, AirportInfrastructure)
 VALUES 
 ('Alaska', 0.000007, 2.775, 1260.608, 150.2857, 0.796,
