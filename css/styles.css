@@ -7,6 +7,11 @@ https://www.w3schools.com/howto/howto_css_two_columns.asp */
   .column {
     flex: 50%;
   }
+
+  .button {
+    border-radius: 3px;
+    font-family: 'Varela Round';
+  }
   
   body {
     width: 30rem
