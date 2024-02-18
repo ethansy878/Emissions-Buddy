@@ -17,7 +17,7 @@
     
     "content_scripts": [
         {
-            "matches": ["https://www.alaskaair.com/*", "https://www.delta.com/*", "https://www.delta.com/*", "https://www.southwest.com/*", "https://www.united.com/*"],
+            "matches": ["https://www.alaskaair.com/*", "https://www.delta.com/*", "https://www.delta.com/*", "https://www.southwest.com/*", "https://www.united.com/"],
             "js": ["./js/popup.js"]
         }
     ]
