@@ -37,6 +37,17 @@ const sendPost = async (url) => {
     document.body.appendChild(img);
 }
 
+<<<<<<< HEAD
+function add_sad_face() {
+    var src = "./assets/EmissionBuddyLogoTransparent.png";
+    show_image("./assets/EmissionBuddyLogoTransparent.png", 100,100, "Sad Face");
+}
+
+
+
+
+=======
+>>>>>>> 28b60e4421b607852ef4c15af8ad8c2288bbf3cc
 // https://dev.to/melvin2016/how-to-convert-an-html-string-into-real-html-or-dom-using-javascript-5992
 // make a new parser
 const parser = new DOMParser();
