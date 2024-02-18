@@ -92,16 +92,24 @@ def car_emissions(a1, a2, cartype):
         return get_dist(a1, a2) * 0.2849
 
 import pandas
+import math
+
 # Get distance between 2 airports
 def get_dist(a1, a2):
-    airports = pandas.read_csv("db/airports.dat", header=0)
+    airports = pandas.read_csv("db/airports.csv", header=0)
     airports = airports.set_index('IATA')
-    lat1 = airports.loc[a1,"Latitude"]
-    lat2 = airports.loc[a2, "Latitude"]
-    lon1 = airports.loc[a1, "Longitude"]
-    lon2 = airports.loc[a2, "Longitude"]
+    lat1 = radians(airports.loc[a1, 'Latitude'])
+    lat2 = radians(airports.loc[a2, 'Latitude'])
+    lon1 = radians(airports.loc[a1, 'Longitude'])
+    lon2 = radians(airports.loc[a2, 'Longitude'])
 
-    d = math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    d = 6373 * c
     print(d)
     return d
 
@@ -163,6 +171,21 @@ def emission_calc():
     x = get_dist(start, end) # distance in kilometers
     polynomial = polynomial_alternative(x)
 
+    print(airlineName)
+    print("Delta" in airlineName)
+    if ("Delta" in airlineName) or (airlineName == '"American"') or (airlineName == '"United"'):
+        print("RUN")
+        if x > 4080:
+            airlineName = airlineName + " (LH)"
+        else:
+            airlineName = airlineName + " (SH)"
+    
+    print(airlineName)
+    airlineName = airlineName.replace('"', "")
+    airlineName = "'" + airlineName + "'"
+    print(airlineName)
+
+
     S = fetch_from_planes(sql, airlineName, "S") # Average number of seats
     PLF = fetch_from_planes(sql, airlineName, "PLF") # Passenger Load Factor
     CF = fetch_from_planes(sql, airlineName, "CF") # Cargo Factor
@@ -214,14 +237,47 @@ def car_emissions(a1, a2, cartype):
 import pandas
 import math
 from math import sin, cos, sqrt, atan2, radians
+
 # Get distance between 2 airports
 def get_dist(a1, a2):
-    airports = pandas.read_csv("db/airports.csv", header=0)
-    airports = airports.set_index('IATA')
-    lat1 = radians(airports.loc[a1, 'Latitude'])
-    lat2 = radians(airports.loc[a2, 'Latitude'])
-    lon1 = radians(airports.loc[a1, 'Longitude'])
-    lon2 = radians(airports.loc[a2, 'Longitude'])
+    airports = pandas.read_csv("db/airports.csv")
+    #airports.set_index('IATA', inplace=True)
+    print(airports)
+    
+    Qstring1 = "IATA ==" + a1
+    Qstring2 = "IATA ==" + a2
+
+    lat1DF = airports.query(Qstring1)
+    lat1dict = lat1DF['Latitude'].to_dict()
+    _, lat1 = lat1dict.popitem()
+    print(lat1)
+    
+    lat2DF = airports.query(Qstring2)
+    lat2dict = lat2DF['Latitude'].to_dict()
+    _, lat2 = lat2dict.popitem()
+    print(lat2)
+    
+    lon1DF = airports.query(Qstring1)
+    lon1dict = lon1DF['Longitude'].to_dict()
+    _, lon1 = lon1dict.popitem()
+    print(lon1)
+
+    lon2DF = airports.query(Qstring2)
+    lon2dict = lon2DF['Longitude'].to_dict()
+    _, lon2 = lon2dict.popitem()
+    print(lon2)
+
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+    lon1 = radians(lon1)
+    lon2 = radians(lon2)
+
+
+    #lat1 = radians(airports.at[a1, 'Latitude'])
+    #print(lat1)
+    #lat2 = radians(airports.loc[str(a2), 'Latitude'])
+    #lon1 = radians(airports.loc[str(a1), 'Longitude'])
+    #lon2 = radians(airports.loc[str(a2), 'Longitude'])
 
     dlon = lon2 - lon1
     dlat = lat2 - lat1
@@ -235,6 +291,7 @@ def get_dist(a1, a2):
 
 def get_carbon_tree_comparison(emissions):
     return int(emissions / 27.8333)
+    # This is how many trees it will take to get rid of your emissions in a year
 
 def hello_world():
     return("Hello World!")
