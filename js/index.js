@@ -34,6 +34,7 @@ const parser = new DOMParser();
 
 // https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
 function onWindowLoad() {
+    let status = document.querySelector("#status");
     let message = document.querySelector('#message');
     let message2 = document.querySelector('#message2');
 
@@ -85,7 +86,7 @@ function onWindowLoad() {
 
 
     }).catch(function (error) {
-        message.innerText = 'There was an error injecting script : \n' + error.message;
+        status.innerText = 'Status: Error! ' + error.message;
     });
 }
 
