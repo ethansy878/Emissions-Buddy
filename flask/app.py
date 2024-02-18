@@ -1,7 +1,6 @@
 # SQL Logic
 # CREDIT: https://realpython.com/python-sql-libraries/
 import sqlite3
-import math
 from sqlite3 import Error
 
 def create_connection(path):
@@ -213,16 +212,24 @@ def car_emissions(a1, a2, cartype):
         return get_dist(a1, a2) * 0.2849
 
 import pandas
+import math
+from math import sin, cos, sqrt, atan2, radians
 # Get distance between 2 airports
 def get_dist(a1, a2):
     airports = pandas.read_csv("db/airports.csv", header=0)
     airports = airports.set_index('IATA')
-    lat1 = airports.loc[a1, 'Latitude']
-    lat2 = airports.loc[a2, 'Latitude']
-    lon1 = airports.loc[a1, 'Longitude']
-    lon2 = airports.loc[a2, 'Longitude']
+    lat1 = radians(airports.loc[a1, 'Latitude'])
+    lat2 = radians(airports.loc[a2, 'Latitude'])
+    lon1 = radians(airports.loc[a1, 'Longitude'])
+    lon2 = radians(airports.loc[a2, 'Longitude'])
 
-    d = math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    d = 6373 * c
     print(d)
     return d
 
