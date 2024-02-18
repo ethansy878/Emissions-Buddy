@@ -53,10 +53,10 @@ function onWindowLoad() {
     let noButton = document.getElementById("NO")
     noButton.addEventListener("click", function() {
         show_image("./assets/SadEM.png", 100, 100, "Sadge")
-        noButton.style.height = "200px";
+        
         //noButton.setAttribute("height", noButton.getAttribute("width") + 100)
     });
-    
+
     let status = document.querySelector("#status");
     let message = document.querySelector('#message');
     let message2 = document.querySelector('#message2');
