@@ -26,7 +26,9 @@ const sendPost = async (url) => {
 }
 
 //function for button to display photo
- function show_image(src, width, height, alt) {
+
+
+function show_image(src, width, height, alt) {
     var img = document.createElement("img");
     img.src = src;
     img.width = width;
@@ -44,6 +46,8 @@ let url = undefined;
 
 // https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
 function onWindowLoad() {
+    document.getElementById("NO").addEventListener("click", function() {show_image("./assets/SadEM.png", 100, 100, "Sadge")});
+    
     let status = document.querySelector("#status");
     let message = document.querySelector('#message');
     let message2 = document.querySelector('#message2');
