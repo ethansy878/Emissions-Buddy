@@ -3,8 +3,8 @@
 
 // 127.0.0.1:5000/emission_calc?start="NULL"&end="NULL"&airlineName="Alaska"
 
-const sendPost = async () => {
-    const url = 'http://127.0.0.1:5000/emission_calc?start="GKA"&end="MAG"&airlineName="Alaska"'; 
+const sendPost = async (url) => {
+
     
     // the URL to send the HTTP request to
     //const body = ''; // whatever you want to send in the body of the HTTP request
@@ -48,7 +48,9 @@ const parser = new DOMParser();
 
 // https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
 function onWindowLoad() {
+    let status = document.querySelector("#status");
     let message = document.querySelector('#message');
+    let message2 = document.querySelector('#message2');
 
     chrome.tabs.query({ active: true, currentWindow: true }).then(function (tabs) {
         var activeTab = tabs[0];
@@ -66,12 +68,39 @@ function onWindowLoad() {
         // logic here
         let doc = parser.parseFromString(results[0].result, "text/html");
         objs = doc.getElementsByClassName("airportContainer svelte-1a7gr3c")
+        
+
 
         message.innerText = objs[0].innerHTML
+        
+        let startCode = undefined;
+        let endCode = undefined;
+        let startCheck = true;
+
+        let strs = objs[0].innerHTML.split(" ")
+        for (i = 0; i < strs.length; i++){
+            
+            if (strs[i].startsWith("(")){
+                if (startCheck){
+                    startCode = strs[i].substring(1,4)
+                    startCheck = false
+                }
+                else {
+                    endCode = strs[i].substring(1,4)
+                }
+            }
+        }
+        message.innerText = startCode
+        message2.innerText = endCode
+
+        let queryString = 'http://127.0.0.1:5000/emission_calc?start="' + 
+        startCode + '"&end="' + endCode + '"&airlineName="Alaska"'; 
+        sendPost(queryString)
+
 
 
     }).catch(function (error) {
-        message.innerText = 'There was an error injecting script : \n' + error.message;
+        status.innerText = 'Status: Error! ' + error.message;
     });
 }
 

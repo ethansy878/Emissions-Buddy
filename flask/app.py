@@ -215,7 +215,7 @@ def car_emissions(a1, a2, cartype):
 import pandas
 # Get distance between 2 airports
 def get_dist(a1, a2):
-    airports = pandas.read_csv("db/airports.dat")
+    airports = pandas.read_csv("db/airports.csv", header=0)
     airports = airports.set_index('IATA')
     lat1 = airports.loc[a1, 'Latitude']
     lat2 = airports.loc[a2, 'Latitude']
