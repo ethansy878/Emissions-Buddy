@@ -28,8 +28,15 @@ def execute_read_query(connection, query):
 # Start Flask Logic
 # Flask import
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+#app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
+#app.config['CORS_HEADERS'] = 'Content-Type'
+
+cors = CORS(app)
+
 
 @app.route("/add")
 def calc():
@@ -38,6 +45,7 @@ def calc():
     return jsonify(sum = num1 + num2)
 
 @app.route("/emission_calc")
+#@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def emission_calc():
     sql = create_connection("./db/mydatabase.db")
 
@@ -60,8 +68,9 @@ def emission_calc():
     A = fetch_from_planes(sql, airlineName, "A") # Airport infrastructure emissions
     
     result = (polynomial/(S * PLF))*(1-CF)*CW*(EF*M+P)+AF*x+A
-    
-    return jsonify((polynomial/(S * PLF))*(1-CF)*CW*(EF*M+P)+AF*x+A)
+    print(result)
+
+    return jsonify(result)
 
 def polynomial_alternative(distKm):
     takeoffKeroseneTons = 1.1; # 1.1 tons of kerosene

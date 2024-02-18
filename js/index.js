@@ -14,11 +14,16 @@ const sendPost = async () => {
     const headers = {}
     //{'Access-Control-Allow-Origin': '*','start': 'NULL', 'end': 'NULL', 'airlineName': "Alaska"}; // if you're sending JSON to the server
     const method = 'GET';
-    const response = await fetch(url, { method, headers });
-    const data = await response.text(); // or response.json() if your server returns JSON
+    const response = await fetch(url);
+    const data = await response.json(); // or response.json() if your server returns JSON
 
+    let emissionNum = document.getElementById('emissionnum')
+
+    /*setTimeout(function(){
+        console.log("Executed after 1 second");
+    }, 1000); */
     
-    document.getElementById('emissionnum').innerHTML = data
+    emissionNum.innerHTML = data
 
     console.log(data);
 }
