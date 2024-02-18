@@ -27,8 +27,12 @@ const sendPost = async () => {
 
 sendPost();
 
-// https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
+// https://dev.to/melvin2016/how-to-convert-an-html-string-into-real-html-or-dom-using-javascript-5992
+// make a new parser
+const parser = new DOMParser();
 
+
+// https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
 function onWindowLoad() {
     let message = document.querySelector('#message');
 
@@ -45,6 +49,13 @@ function onWindowLoad() {
 
     }).then(function (results) {
         message.innerText = results[0].result;
+        // logic here
+        let doc = parser.parseFromString(results[0].result, "text/html");
+        objs = doc.getElementsByClassName("airportContainer svelte-1a7gr3c")
+
+        message.innerText = objs[0].innerHTML
+
+
     }).catch(function (error) {
         message.innerText = 'There was an error injecting script : \n' + error.message;
     });
@@ -61,6 +72,8 @@ function DOMtoString(selector) {
     }
     return selector.outerHTML;
 }
+
+
 
 
 /*
