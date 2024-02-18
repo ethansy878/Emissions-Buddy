@@ -1,3 +1,4 @@
+"""
 # SQL Logic
 # CREDIT: https://realpython.com/python-sql-libraries/
 import sqlite3
@@ -85,11 +86,11 @@ def fetch_from_planes(sql, airlineName: str, data: str):
     print(result[0][0])
     return result[0][0] # because array of tuples
 
-def car_emissions(a1, a2, cartype):
-    if cartype is True: # regular fuel
-        return get_dist(a1, a2) * 0.2487
-    else: # diesel 
-        return get_dist(a1, a2) * 0.2849
+# def car_emissions(a1, a2, cartype):
+#     if cartype is True: # regular fuel
+#        return get_dist(a1, a2) * 0.2487
+#    else: # diesel 
+#        return get_dist(a1, a2) * 0.2849
 
 import pandas
 import math
@@ -113,7 +114,9 @@ def get_dist(a1, a2):
     print(d)
     return d
 
-def get_carbon_tree_comparison(emissions):
+@app.route("/trees")
+def trees():
+    emissions = request.args.get('emissions', type=float)
     return int(emissions / 27.8333)
 
 def hello_world():
@@ -125,6 +128,8 @@ def hello_world():
 # BROWSER REQUEST (Localhost):
 # http://127.0.0.1:5000/emission_calc?start=%22NULL%22&end=%22NULL%22&airlineName=%22NULL%22
 # CALL THIS IN THE CHROME EXTENSION JAVASCRIPT
+"""
+
 # SQL Logic
 # CREDIT: https://realpython.com/python-sql-libraries/
 import sqlite3
@@ -199,7 +204,7 @@ def emission_calc():
     result = (polynomial/(S * PLF))*(1-CF)*CW*(EF*M+P)+AF*x+A
     print(result)
 
-    return jsonify(result)
+    return jsonify(round(result, 2))
 
 def polynomial_alternative(distKm):
     takeoffKeroseneTons = 1.1; # 1.1 tons of kerosene
@@ -289,9 +294,11 @@ def get_dist(a1, a2):
     print(d)
     return d
 
-def get_carbon_tree_comparison(emissions):
-    return int(emissions / 27.8333)
-    # This is how many trees it will take to get rid of your emissions in a year
+@app.route("/trees")
+def trees():
+    emissions = request.args.get('emissions', type=str)
+    print(emissions)
+    return jsonify(int(float(emissions) / 27.8333))
 
 def hello_world():
     return("Hello World!")

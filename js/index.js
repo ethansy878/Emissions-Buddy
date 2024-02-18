@@ -4,8 +4,6 @@
 // 127.0.0.1:5000/emission_calc?start="NULL"&end="NULL"&airlineName="Alaska"
 
 const sendPost = async (url) => {
-
-    
     // the URL to send the HTTP request to
     //const body = ''; // whatever you want to send in the body of the HTTP request
     const headers = {}
@@ -22,7 +20,13 @@ const sendPost = async (url) => {
     
     emissionNum.innerHTML = data
 
-    console.log(data);
+    treeUrl = 'http://127.0.0.1:5000/trees?emissions=' + data
+    
+    const treeResponse = await fetch(treeUrl)
+    const treeData = await treeResponse.json(); // or response.json() if your server returns JSON
+
+    let treeNum = document.getElementById('treenum')
+    treeNum.innerHTML = treeData
 }
 
 //function for button to display photo
@@ -75,7 +79,6 @@ function onWindowLoad() {
         let airlineName = undefined
         let objs = {}
 
-        status.innerText = url;
 
         if (url.includes("alaskaair")){
             airlineName = "Alaska"
@@ -111,8 +114,8 @@ function onWindowLoad() {
         startCode + '"&end="' + endCode + '"&airlineName="' + airlineName + '"';
         sendPost(queryString)
 
-    //}).catch(function (error) {
-      //  status.innerText = 'Status: Error! ' + error.message;
+    }).catch(function (error) {
+        status.innerText = 'Status: Error! ' + error.message;
     });
 }
 
