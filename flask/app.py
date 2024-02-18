@@ -96,11 +96,11 @@ import pandas
 # Get distance between 2 airports
 def get_dist(a1, a2):
     airports = pandas.read_csv("db/airports.dat", header=0)
-    lat1 = airports.loc[airports["IATA"] == a1]["Latitude"]
-    lat1 = airports[airports.IATA == a1]["Latitude"]
-    lat2 = airports.at[a2, "Latitude"]
-    lon1 = airports.at[a1, "Longitude"]
-    lon2 = airports.at[a2, "Longitude"]
+    airports = airports.set_index('IATA')
+    lat1 = airports.loc[a1,"Latitude"]
+    lat2 = airports.loc[a2, "Latitude"]
+    lon1 = airports.loc[a1, "Longitude"]
+    lon2 = airports.loc[a2, "Longitude"]
 
     d = math.cos(math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1)) * 6371
     print(d)
