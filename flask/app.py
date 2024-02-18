@@ -180,7 +180,7 @@ def emission_calc():
     print("Delta" in airlineName)
     if ("Delta" in airlineName) or (airlineName == '"American"') or (airlineName == '"United"'):
         print("RUN")
-        if x > 4080:
+        if x > 4800:
             airlineName = airlineName + " (LH)"
         else:
             airlineName = airlineName + " (SH)"

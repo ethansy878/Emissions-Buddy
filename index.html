@@ -19,7 +19,7 @@ body {
     <div id="title" class="row">
         <h1 class="column"><b>Emissions Buddy</b></h1>
         <div class="column">
-            <img src="./assets/EmissionBuddyLogoTransparent.png" width="100" height="100" style="float: right">
+            <img id="mainimg" src="./assets/EmissionBuddyLogoTransparent.png" width="100" height="100" style="float: right">
         </div>
     </div>
     
@@ -34,13 +34,13 @@ body {
     <div id="active" hidden>
         <div class="row">
             <div class="column">
-                <p>Flight detected! Your total emissions are:</p> 
-                <p id="emissionnum"></p>
+                <p>Your total emissions are:</p> 
+                <p id="emissionnum">N/A</p>
                 <p id="treenum"></p>
             </div>
             <div class="column">
                 <h3>Do you want to change travel plans?
-                    <a href="http://www.google.com" target="_blank"><button class="button">YES</button></a>
+                    <a target="_blank"><button id="YES" class="button">YES</button></a>
                     <button id="NO" class="button">NO</button>
                 </h3>
             </div>
