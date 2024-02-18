@@ -2,8 +2,8 @@
 
 // chrome.action.setPopup("carbonemission.html");
 
-let idle = document.getElementById("idle");
-idle.setAttribute("hidden", true);
+//let idle = document.getElementById("idle");
+//idle.setAttribute("hidden", true);
 
 /*
 let iframe = document.createElement("iframe"); 
