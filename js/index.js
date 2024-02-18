@@ -26,7 +26,7 @@ const sendPost = async (url) => {
     const treeData = await treeResponse.json(); // or response.json() if your server returns JSON
 
     let treeNum = document.getElementById('treenum')
-    treeNum.innerHTML = treeData + " Trees I need to plant in to offset your CO2 within a year"
+    treeNum.innerHTML = treeData + " Trees I need to plant to offset your CO2 within a year"
 }
 
 //function for button to display photo
@@ -58,8 +58,10 @@ function onWindowLoad() {
     });
 
     let status = document.querySelector("#status");
-    let message = document.querySelector('#message');
-    let message2 = document.querySelector('#message2');
+    let idle = document.querySelector("#idle");
+    let active = document.querySelector("#active");
+
+
 
     chrome.tabs.query({ active: true, currentWindow: true }).then(function (tabs) {
         var activeTab = tabs[0];
@@ -75,7 +77,6 @@ function onWindowLoad() {
         });
 
     }).then(function (results) {
-        message.innerText = results[0].result;
         // logic here
         let doc = parser.parseFromString(results[0].result, "text/html");
 
@@ -86,6 +87,8 @@ function onWindowLoad() {
 
 
         if (url.includes("alaskaair")){
+            idle.setAttribute("hidden", true);
+            active.removeAttribute("hidden");
             airlineName = "Alaska"
             objs = doc.getElementsByClassName("airportContainer svelte-1a7gr3c")
             let startCheck = true;
@@ -103,16 +106,17 @@ function onWindowLoad() {
                     }
                 }
             }
-            message.innerText = startCode
-            message2.innerText = endCode    
         }
-        else {
+        else if (url.includes("delta")) {
+            idle.setAttribute("hidden", true);
+            active.removeAttribute("hidden");
             airlineName = "Delta"
             objs = doc.getElementsByClassName("airport-code d-block ng-tns-c79-5")
             startCode = objs.item(0).innerHTML
             endCode = objs.item(1).innerHTML
-            message.innerText = startCode
-            message2.innerText = endCode    
+        }
+        else {
+            return;
         }
         
         let queryString = 'http://127.0.0.1:5000/emission_calc?start="' + 
