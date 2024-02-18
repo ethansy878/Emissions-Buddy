@@ -37,6 +37,7 @@ const sendPost = async (url) => {
     document.body.appendChild(img);
 }
 
+<<<<<<< HEAD
 function add_sad_face() {
     var src = "./assets/EmissionBuddyLogoTransparent.png";
     show_image("./assets/EmissionBuddyLogoTransparent.png", 100,100, "Sad Face");
@@ -45,11 +46,12 @@ function add_sad_face() {
 
 
 
+=======
+>>>>>>> 28b60e4421b607852ef4c15af8ad8c2288bbf3cc
 // https://dev.to/melvin2016/how-to-convert-an-html-string-into-real-html-or-dom-using-javascript-5992
 // make a new parser
 const parser = new DOMParser();
-let site = undefined;
-
+let url = undefined;
 
 // https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
 function onWindowLoad() {
@@ -61,7 +63,7 @@ function onWindowLoad() {
         var activeTab = tabs[0];
         var activeTabId = activeTab.id;
 
-        let site = tabs[0].url;
+        url = tabs[0].url.toString();
 
         return chrome.scripting.executeScript({
             target: { tabId: activeTabId },
@@ -79,6 +81,8 @@ function onWindowLoad() {
         let endCode = undefined;
         let airlineName = undefined
         let objs = {}
+
+        status.innerText = url;
 
         if (url.includes("alaskaair")){
             airlineName = "Alaska"
@@ -104,16 +108,18 @@ function onWindowLoad() {
         else {
             airlineName = "Delta"
             objs = doc.getElementsByClassName("airport-code d-block ng-tns-c79-5")
-            startCode = objs[0].innerHTML
-            endCode = objs[1].innerHTML
+            startCode = objs.item(0).innerHTML
+            endCode = objs.item(1).innerHTML
+            message.innerText = startCode
+            message2.innerText = endCode    
         }
         
         let queryString = 'http://127.0.0.1:5000/emission_calc?start="' + 
         startCode + '"&end="' + endCode + '"&airlineName="' + airlineName + '"';
         sendPost(queryString)
 
-    }).catch(function (error) {
-        status.innerText = 'Status: Error! ' + error.message;
+    //}).catch(function (error) {
+      //  status.innerText = 'Status: Error! ' + error.message;
     });
 }
 
