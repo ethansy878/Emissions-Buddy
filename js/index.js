@@ -25,7 +25,21 @@ const sendPost = async (url) => {
     console.log(data);
 }
 
-//sendPost();
+//function for button to display photo
+ function show_image(src, width, height, alt) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    img.alt = alt;
+
+    // This next line will just add it to the <body> tag
+    document.body.appendChild(img);
+}
+
+
+
+sendPost();
 
 // https://dev.to/melvin2016/how-to-convert-an-html-string-into-real-html-or-dom-using-javascript-5992
 // make a new parser
