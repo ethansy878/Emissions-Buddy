@@ -25,11 +25,26 @@ const sendPost = async (url) => {
     console.log(data);
 }
 
-//sendPost();
+//function for button to display photo
+ function show_image(src, width, height, alt) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    img.alt = alt;
+
+    // This next line will just add it to the <body> tag
+    document.body.appendChild(img);
+}
+
+
+
+sendPost();
 
 // https://dev.to/melvin2016/how-to-convert-an-html-string-into-real-html-or-dom-using-javascript-5992
 // make a new parser
 const parser = new DOMParser();
+let site = undefined;
 
 
 // https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
@@ -42,6 +57,8 @@ function onWindowLoad() {
         var activeTab = tabs[0];
         var activeTabId = activeTab.id;
 
+        let site = tabs[0].url;
+
         return chrome.scripting.executeScript({
             target: { tabId: activeTabId },
             // injectImmediately: true,  // uncomment this to make it execute straight away, other wise it will wait for document_idle
@@ -53,37 +70,43 @@ function onWindowLoad() {
         message.innerText = results[0].result;
         // logic here
         let doc = parser.parseFromString(results[0].result, "text/html");
-        objs = doc.getElementsByClassName("airportContainer svelte-1a7gr3c")
-        
 
-
-        message.innerText = objs[0].innerHTML
-        
         let startCode = undefined;
         let endCode = undefined;
-        let startCheck = true;
+        let airlineName = undefined
+        let objs = {}
 
-        let strs = objs[0].innerHTML.split(" ")
-        for (i = 0; i < strs.length; i++){
-            
-            if (strs[i].startsWith("(")){
-                if (startCheck){
-                    startCode = strs[i].substring(1,4)
-                    startCheck = false
-                }
-                else {
-                    endCode = strs[i].substring(1,4)
+        if (url.includes("alaskaair")){
+            airlineName = "Alaska"
+            objs = doc.getElementsByClassName("airportContainer svelte-1a7gr3c")
+            let startCheck = true;
+
+            let strs = objs[0].innerHTML.split(" ")
+            for (i = 0; i < strs.length; i++){
+                
+                if (strs[i].startsWith("(")){
+                    if (startCheck){
+                        startCode = strs[i].substring(1,4)
+                        startCheck = false
+                    }
+                    else {
+                        endCode = strs[i].substring(1,4)
+                    }
                 }
             }
+            message.innerText = startCode
+            message2.innerText = endCode    
         }
-        message.innerText = startCode
-        message2.innerText = endCode
-
+        else {
+            airlineName = "Delta"
+            objs = doc.getElementsByClassName("airport-code d-block ng-tns-c79-5")
+            startCode = objs[0].innerHTML
+            endCode = objs[1].innerHTML
+        }
+        
         let queryString = 'http://127.0.0.1:5000/emission_calc?start="' + 
-        startCode + '"&end="' + endCode + '"&airlineName="Alaska"'; 
+        startCode + '"&end="' + endCode + '"&airlineName="' + airlineName + '"';
         sendPost(queryString)
-
-
 
     }).catch(function (error) {
         status.innerText = 'Status: Error! ' + error.message;
