@@ -76,11 +76,11 @@ def fetch_from_planes(planeType: str, data: str):
         "CF": "CargoFactor",
         "EF": "EconomyFactor",
         "PF": "PremiumFactor",
-        "BusinessFactor",
-        "FirstClassFactor",
-        "EmissionFactor",
-        "NonCO2Effects",
-        "PreProduction",
+        "BF" "BusinessFactor",
+        "FC" "FirstClassFactor",
+        "EF": "EmissionFactor",
+        "M": "NonCO2Effects",
+        "P": "PreProduction",
         "AF" "AircraftFactor",
         "A": "AirportInfrastructure"
     }
