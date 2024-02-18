@@ -11,4 +11,4 @@ div.innerText = "Button";
 
 
 
-on booking site detected scrape("start", "end")
+// on booking site detected scrape("start", "end")
