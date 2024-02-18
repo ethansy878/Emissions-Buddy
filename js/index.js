@@ -1,13 +1,30 @@
-if (window.location.toString === "www.alaskaair.com"){
-    let idle = document.getElementById('idle');
-    idle.setAttribute("hidden", true)
-};
+// https://www.reddit.com/r/flask/comments/afgks4/how_to_get_a_javascript_function_to_call_a_flask/
 
 
-chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-    let url = tabs[0].url;
-    document.getElementById('status').innerHTML = "Edited"
-});
+// 127.0.0.1:5000/emission_calc?start="NULL"&end="NULL"&airlineName="Alaska"
+
+const sendPost = async () => {
+    const url = 'http://127.0.0.1:5000/emission_calc?start="NULL"&end="NULL"&airlineName="Alaska"'; 
+    
+    
+    
+    
+    // the URL to send the HTTP request to
+    //const body = ''; // whatever you want to send in the body of the HTTP request
+    const headers = {}
+    //{'Access-Control-Allow-Origin': '*','start': 'NULL', 'end': 'NULL', 'airlineName': "Alaska"}; // if you're sending JSON to the server
+    const method = 'GET';
+    const response = await fetch(url, { method, headers });
+    const data = await response.text(); // or response.json() if your server returns JSON
+
+    
+    document.getElementById('emissionnum').innerHTML = data
+
+    console.log(data);
+}
+
+sendPost();
+
 
 /*
 function replace(){

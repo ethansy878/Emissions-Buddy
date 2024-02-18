@@ -58,6 +58,8 @@ def emission_calc():
     AF = fetch_from_planes(sql, airlineName, "AF") # Aircraft factor
     A = fetch_from_planes(sql, airlineName, "A") # Airport infrastructure emissions
     
+    result = (polynomial/(S * PLF))*(1-CF)*CW*(EF*M+P)+AF*x+A
+    
     return jsonify((polynomial/(S * PLF))*(1-CF)*CW*(EF*M+P)+AF*x+A)
 
 def polynomial_alternative(distKm):
